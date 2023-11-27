@@ -1,8 +1,3 @@
-# React + Vite
+# Product Stocks 📦
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This project is a product stock management application developed as part of the ['Apprendre React'](https://www.youtube.com/playlist?list=PLjwdMgw5TTLUEOKPg5Z5TgwAOeWkjGL69) training series by Grafikart.
