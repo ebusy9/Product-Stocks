@@ -68,7 +68,7 @@ body {
     background-color: #e9e7e7;
 }
 
-.highest-price .category-name {
+.out-of-stock .category-name {
     color: red;
 }
 
@@ -78,4 +78,8 @@ body {
 
 .category-row div{
     width: 50%;
+}
+
+#stocked {
+    cursor: pointer;
 }

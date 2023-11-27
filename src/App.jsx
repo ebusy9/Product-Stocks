@@ -1,64 +1,64 @@
 import { useState } from "react"
 import './assets/style.css'
+import Input from "./components/forms/Input"
+import Checkbox from "./components/forms/Checkbox"
+import ProductRow from "./components/products/ProductRow"
+import ProductCategoryRow from "./components/products/ProductCategoryRow"
 
+const PRODUCTS = [
+  { category: 'Fruits', price: '1', stocked: true, name: 'Apple' },
+  { category: 'Fruits', price: '1', stocked: true, name: 'Dragonfruit' },
+  { category: 'Fruits', price: '2', stocked: false, name: 'Passionfruit' },
+  { category: 'Vegetable', price: '2', stocked: true, name: 'Spinach' },
+  { category: 'Vegetable', price: '4', stocked: false, name: 'Pumpkin' },
+  { category: 'Vegetable', price: '1', stocked: true, name: 'Peas' }
+]
+
+function App() {
+
+  return <><SearchBar />
+    <ProductTable products={PRODUCTS} />
+  </>
+}
 
 function SearchBar() {
   return (
     <div className="search-bar">
-      <div className="search-input-wrapper">
-        <Input />
-      </div>
-      <div className="checkbox-wrapper">
-        <Checkbox />
-      </div>
+      <Input placeholder="Search..." />
+      <Checkbox checked={false} label="Show only products in stock" id="stocked" />
     </div>
   )
 }
 
-function Input() {
 
-  return <input type="text" name="search" id="search-input" placeholder="Search" />
-}
 
-function Checkbox() {
 
-  return <>
-    <input type="checkbox" name="isInStock" id="is-in-stock-checkbox" />
-    <label htmlFor="isInStock">Show only products in stock</label>
-  </>
-}
+function ProductTable({ products }) {
 
-function ProductTable() {
+  const rows = []
+  let lastCategory = null
+
+  products.forEach(product => {
+    if (lastCategory !== product.category) {
+      rows.push(<ProductCategoryRow key={product.category} catergoryName={product.category} />)
+    }
+    lastCategory = product.category
+    rows.push(<ProductRow key={product.name} product={product} />)
+  })
+
   return (
     <div className="product-table">
       <div className="row category-types">
         <div className="category-name">Name</div>
         <div className="category-price">Price</div>
       </div>
-      <ProductCategoryRow catergoryName="Fruits" />
-      <ProductRow productName="Apple" productPrice="1" />
-      <ProductRow productName="Dragonfruit" productPrice="1" />
-      <ProductRow productName="Passionfruit" productPrice="2" highestPrice/>
-      <ProductCategoryRow catergoryName="Vegetable" />
-      <ProductRow productName="Spinach" productPrice="2" />
-      <ProductRow productName="Pumpkin" productPrice="4" highestPrice/>
-      <ProductRow productName="Peas" productPrice="1" />
+      {rows}
     </div>
   )
 }
 
-function ProductCategoryRow({ catergoryName }) {
-  return <div className="row category-title">{catergoryName}</div>
-}
 
-function ProductRow({ productName, productPrice, highestPrice}) { 
 
-  let className = highestPrice ? 'row category-row highest-price' : 'row category-row'
 
-  return <div className={className}>
-    <div className="category-name">{productName}</div>
-    <div className="category-price">${productPrice}</div>
-  </div>
-}
 
-export { SearchBar, ProductTable }
+export default App
