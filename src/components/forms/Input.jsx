@@ -1,7 +1,7 @@
 /**
  * @param {string} placeholder 
  * @param {string} value 
- * @param {(s: string) => void} onChange 
+ * @param {callback} onChange 
  * @returns {JSX.Element}
  */
 

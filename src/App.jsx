@@ -14,23 +14,39 @@ const PRODUCTS = [
   { category: 'Vegetable', price: '1', stocked: true, name: 'Peas' }
 ]
 
+
 function App() {
 
-  return <><SearchBar />
-    <ProductTable products={PRODUCTS} />
+  const [showStockedOnly, setShowStockedOnly] = useState(false)
+  const [search, setSearch] = useState('')
+
+  const visibleProducts = PRODUCTS.filter(product => {
+    if (showStockedOnly && !product.stocked) {
+      return false
+    }
+
+    if (search && !product.name.toLowerCase()
+      .includes(search.toLowerCase())) {
+      return false
+    }
+
+    return true
+  })
+
+  return <><SearchBar showStockedOnly={showStockedOnly} onStockedOnlyChange={setShowStockedOnly} search={search} setSearch={setSearch} />
+    <ProductTable products={visibleProducts} />
   </>
 }
 
-function SearchBar() {
+
+function SearchBar({ showStockedOnly, onStockedOnlyChange, search, setSearch }) {
   return (
     <div className="search-bar">
-      <Input placeholder="Search..." />
-      <Checkbox checked={false} label="Show only products in stock" id="stocked" />
+      <Input placeholder="Search..." value={search} onChange={setSearch} />
+      <Checkbox checked={showStockedOnly} label="Show only products in stock" id="stocked" onChange={onStockedOnlyChange} />
     </div>
   )
 }
-
-
 
 
 function ProductTable({ products }) {
@@ -56,9 +72,6 @@ function ProductTable({ products }) {
     </div>
   )
 }
-
-
-
 
 
 export default App

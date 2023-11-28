@@ -14,7 +14,7 @@ function Checkbox({ checked, onChange, label, id }) {
             name="isInStock"
             id={id}
             checked={checked}
-            onChange={(e) => onChange(e.target.value)}
+            onChange={(e) => onChange(e.target.checked)}
         />
         <label htmlFor={id}>{label}</label>
     </div>
